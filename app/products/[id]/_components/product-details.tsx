@@ -1,5 +1,6 @@
 "use client";
 
+import DeliveryInfo from "@/app/_components/delivery-info";
 import DiscountBadge from "@/app/_components/discount-badge";
 import ProductList from "@/app/_components/product-list";
 import { Button } from "@/app/_components/ui/button";
@@ -50,6 +51,8 @@ const ProductDetails = ({
 
   return (
     <div className="py-5">
+      {/* IMAGEM DO PRODUTO  */}
+
       <div className="flex items-center gap-2 px-5">
         <div className="relative h-6 w-6">
           <Image
@@ -103,40 +106,13 @@ const ProductDetails = ({
         </div>
       </div>
 
-      {/* DADOS DA ENTREGA */}
+      {/* INFORMAÇÕES DO DELIVERY */}
 
-      <div className="px-5">
-        <Card className="mt-6 flex justify-around py-3">
-          {/* CUSTO */}
-
-          <div className="flex flex-col items-center">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <span className="text-xs">Entrega</span>
-              <BikeIcon size={14} />
-            </div>
-
-            {Number(product.restaurant.deliveryFee) > 0 ? (
-              <p className="text-xs font-semibold">
-                {formatCurrency(Number(product.restaurant.deliveryFee))}
-              </p>
-            ) : (
-              <p className="text-xs font-semibold">Grátis</p>
-            )}
-          </div>
-
-          {/* TEMPO */}
-
-          <div className="flex flex-col items-center">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <span className="text-xs">Entrega</span>
-              <TimerIcon size={14} />
-            </div>
-            <p className="text-xs font-semibold">
-              {product.restaurant.deliveryTimeMinutes} min
-            </p>
-          </div>
-        </Card>
+      <div className="px-5 pt-6">
+        <DeliveryInfo restaurant={product.restaurant} />
       </div>
+
+      {/* INFORMAÇÕES DO RESTAURANTE */}
 
       <div className="mt-6 space-y-2 px-5">
         <h3 className="font-semibold">Sobre</h3>
@@ -144,10 +120,14 @@ const ProductDetails = ({
         <p className="text-sm text-muted-foreground">{product.description}</p>
       </div>
 
+      {/* LISTA DE SUCOS */}
+
       <div className="mt-6 space-y-2 px-5">
         <h3 className="font-semibold">Sucos</h3>
         <ProductList products={complemantaryProducts} />
       </div>
+
+      {/* BOTÃO PARA ADICIONAR A SACOLA */}
 
       <div className="mt-6 px-5">
         <Button className="w-full font-semibold">Adicionar à sacola</Button>
