@@ -42,8 +42,8 @@ export default async function Home() {
         />
       </div>
 
-      <div className="space-y-4 px-5 pt-6">
-        <div className="flex items-center justify-between">
+      <div className="space-y-4 pl-5 pt-6">
+        <div className="flex items-center justify-between ">
           <h2 className="font-semibold">Pedidos Recomendados</h2>
           <Button
             variant="ghost"
@@ -63,8 +63,8 @@ export default async function Home() {
         />
       </div>
 
-      <div className="space-y-4 py-6">
-        <div className="flex items-center justify-between px-5">
+      <div className="space-y-4 py-6 pl-5">
+        <div className="flex items-center justify-between ">
           <h2 className="font-semibold">Restaurantes Recomendados</h2>
           <Button
             variant="ghost"
