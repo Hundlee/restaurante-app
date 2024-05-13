@@ -57,18 +57,18 @@ const CartItem = ({ cartProducts }: CartItemProps) => {
             <Button
               size="icon"
               variant="ghost"
-              className="h-8 w-8 border border-solid border-muted-foreground"
+              className="h-7 w-7 border border-solid border-muted-foreground"
               onClick={handleDecreaseProductQuantity}
             >
-              <ChevronLeftIcon />
+              <ChevronLeftIcon size={16} />
             </Button>
-            <span className="w-4 text-sm">{cartProducts.quantity}</span>
+            <span className="block w-3 text-xs">{cartProducts.quantity}</span>
             <Button
               size="icon"
-              className="h-8 w-8"
+              className="h-7 w-7"
               onClick={handleIncreaseProductQuantity}
             >
-              <ChevronRightIcon />
+              <ChevronRightIcon size={16} />
             </Button>
           </div>
         </div>
@@ -76,7 +76,7 @@ const CartItem = ({ cartProducts }: CartItemProps) => {
       <Button
         variant="ghost"
         size="icon"
-        className="h-8 w-8"
+        className="h-8 w-8 border border-solid border-muted-foreground"
         onClick={handleDeleteProductToCart}
       >
         <Trash2 size={18} />
