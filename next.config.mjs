@@ -5,8 +5,10 @@ const nextConfig = {
       {
         hostname: "utfs.io",
       },
+      {
+        hostname: "lh3.googleusercontent.com",
+      },
     ],
   },
 };
-
 export default nextConfig;
