@@ -72,11 +72,17 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }, 0);
   }, [products]);
 
-  const totalPrice = useMemo(() => {
+  const totalPriceProduct = useMemo(() => {
     return products.reduce((acc, product) => {
       return acc + calculateProductTotalPrice(product) * product.quantity;
     }, 0);
   }, [products]);
+
+  const totalPrice = useMemo(() => {
+    return products.reduce((acc, product) => {
+      return acc + totalPriceProduct + Number(product.restaurant.deliveryFee);
+    }, 0);
+  }, [totalPriceProduct, products]);
 
   const totalQuantity = useMemo(() => {
     return products.reduce((acc, product) => {
@@ -84,7 +90,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }, 0);
   }, [products]);
 
-  const totalDiscounts = subtotalPrice - totalPrice;
+  const totalDiscounts = subtotalPrice - totalPriceProduct;
 
   const clearCart = () => {
     return setProducts([]);
