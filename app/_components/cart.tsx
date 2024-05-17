@@ -18,7 +18,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "./ui/alert-dialog";
 
 const Cart = () => {
@@ -50,6 +49,14 @@ const Cart = () => {
         status: OrderStatus.CONFIRMED,
         user: {
           connect: { id: data.user.id },
+        },
+        products: {
+          createMany: {
+            data: products.map((product) => ({
+              productId: product.id,
+              quantity: product.quantity,
+            })),
+          },
         },
       });
 
@@ -88,7 +95,7 @@ const Cart = () => {
                     <span className="text-muted-foreground">
                       Total de Descontos
                     </span>
-                    <span>- {formatCurrency(totalDiscounts)}</span>
+                    <span>{formatCurrency(totalDiscounts)}</span>
                   </div>
 
                   <Separator />
@@ -109,11 +116,7 @@ const Cart = () => {
 
                   <div className="flex items-center justify-between text-xs font-semibold ">
                     <span>Total</span>
-                    <span>
-                      {formatCurrency(
-                        totalPrice + Number(products[0].restaurant.deliveryFee),
-                      )}
-                    </span>
+                    <span>{formatCurrency(totalPrice)}</span>
                   </div>
                 </CardContent>
               </Card>
