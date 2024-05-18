@@ -62,7 +62,7 @@ const OrderItem = ({ order }: OrderItemProps) => {
             </span>
           </div>
 
-          <Button size="icon" variant="link" className="h-5 w-5">
+          <Button size="icon" variant="link" className="h-5 w-5 text-black">
             <Link href={`/restaurants/${order.restaurant.id}`}>
               <ChevronRightIcon />
             </Link>
@@ -99,7 +99,7 @@ const OrderItem = ({ order }: OrderItemProps) => {
             size="sm"
             className="text-xs font-semibold text-primary"
           >
-            Adicionar à sacola
+            Refazer pedido
           </Button>
         </div>
       </CardContent>
