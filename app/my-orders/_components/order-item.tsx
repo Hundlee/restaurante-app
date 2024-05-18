@@ -33,7 +33,7 @@ const getOrderStatusLabel = (status: OrderStatus) => {
     case "DELIVERING":
       return "Em Transporte";
     case "COMPLETED":
-      return "Entregue";
+      return "Finalizado";
   }
 };
 
@@ -41,7 +41,9 @@ const OrderItem = ({ order }: OrderItemProps) => {
   return (
     <Card>
       <CardContent className="p-5">
-        <div className="w-fit rounded-full bg-[#EEEEEE] px-2 py-1 text-muted-foreground">
+        <div
+          className={`w-fit rounded-full bg-[#EEEEEE] px-2 py-1 text-muted-foreground ${order.status !== "COMPLETED" && "bg-green-500 text-white"} ${order.status === "CANCELED" && "bg-red-500 text-white"}`}
+        >
           <span className="block text-xs font-semibold">
             {getOrderStatusLabel(order.status)}
           </span>
@@ -60,7 +62,7 @@ const OrderItem = ({ order }: OrderItemProps) => {
             </span>
           </div>
 
-          <Button size="icon" variant="ghost" className="h-5 w-5">
+          <Button size="icon" variant="link" className="h-5 w-5">
             <Link href={`/restaurants/${order.restaurant.id}`}>
               <ChevronRightIcon />
             </Link>
