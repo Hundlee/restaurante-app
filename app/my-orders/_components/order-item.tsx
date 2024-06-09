@@ -4,10 +4,13 @@ import { Avatar, AvatarImage } from "@/app/_components/ui/avatar";
 import { Button } from "@/app/_components/ui/button";
 import { Card, CardContent } from "@/app/_components/ui/card";
 import { Separator } from "@/app/_components/ui/separator";
+import { CartContext } from "@/app/_context/cart";
 import { formatCurrency } from "@/app/_helpers/price";
 import { OrderStatus, Prisma } from "@prisma/client";
 import { ChevronRightIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
 
 interface OrderItemProps {
   order: Prisma.OrderGetPayload<{
@@ -38,6 +41,20 @@ const getOrderStatusLabel = (status: OrderStatus) => {
 };
 
 const OrderItem = ({ order }: OrderItemProps) => {
+  const { addProductToCart } = useContext(CartContext);
+  const router = useRouter();
+
+  const handleRedoOrderClick = () => {
+    for (const orderProducts of order.products) {
+      addProductToCart({
+        product: { ...orderProducts.product, restaurant: order.restaurant },
+        quantity: orderProducts.quantity,
+      });
+    }
+
+    router.push(`/restaurants/${order.restaurantId}`);
+  };
+
   return (
     <Card>
       <CardContent className="p-5">
@@ -73,7 +90,7 @@ const OrderItem = ({ order }: OrderItemProps) => {
           <Separator />
         </div>
 
-        <div className="space-y-1">
+        <div className="space-y-2">
           {order.products.map((product) => (
             <div key={product.id} className="flex items-center gap-1">
               <div className="flex h-5 w-5 items-center justify-center rounded-full bg-muted-foreground">
@@ -98,6 +115,7 @@ const OrderItem = ({ order }: OrderItemProps) => {
             variant="ghost"
             size="sm"
             className="text-xs font-semibold text-primary"
+            onClick={handleRedoOrderClick}
           >
             Refazer pedido
           </Button>
